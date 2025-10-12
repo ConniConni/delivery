@@ -46,11 +46,6 @@ def create_sample_teams_structure(config):
     # KeyErrorが発生しないよう、get()メソッドを使用するか、事前にセクションとキーの存在を確認
     try:
         sample_teams_root = Path(config["Paths"]["sample_teams_root"])
-        print("*" * 10)
-        print(f"sample_teams_root:{sample_teams_root}")
-        print(f'Paths:{config["Paths"]}')
-        print(f'sample_teams_root:{config["Paths"]["sample_teams_root"]}')
-        print("*" * 10)
         project_name = config["Project"]["project_name"]
         item_name = config["Project"]["item_name"]
     except KeyError as e:
