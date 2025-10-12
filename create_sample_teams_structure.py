@@ -8,6 +8,17 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
+# 工程番号と工程名のマッピング
+PROCESS_MAP = {
+    "030": "調査",
+    "040": "設計",
+    "050": "製造",
+    "060": "UD作成",
+    "070": "UD消化",
+    "080": "SD作成",
+    "090": "SD消化",
+}
+
 
 def load_config(config_file="config.ini"):
     """設定ファイルを読み込む"""
@@ -67,17 +78,6 @@ def create_sample_teams_structure(config):
 
     teams_base_path = project_root / quarter_folder
     teams_base_path.mkdir(exist_ok=True)
-
-    # 工程番号と工程名のマッピング
-    PROCESS_MAP = {
-        "030": "調査",
-        "040": "設計",
-        "050": "製造",
-        "060": "UD作成",
-        "070": "UD消化",
-        "080": "SD作成",
-        "090": "SD消化",
-    }
 
     # 日付のサンプリング
     today = datetime.date.today()
