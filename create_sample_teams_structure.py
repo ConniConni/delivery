@@ -95,7 +95,7 @@ def create_sample_teams_structure(config):
         main_excel_file_path = None
         if p_num == "030":  # 調査
             main_excel_file_path = (
-                process_dir / f"調査A_{project_name}_{item_name}.xlsx"
+                process_dir / f"調査検討書_{project_name}_{item_name}.xlsx"
             )
             create_empty_excel_file(main_excel_file_path)
         elif p_num == "040":  # 設計
@@ -166,7 +166,7 @@ def create_sample_teams_structure(config):
                 date_folder_int2 = internal_review_dir / date2.strftime("%Y%m%d")
                 date_folder_int2.mkdir(exist_ok=True)
                 create_empty_excel_file(
-                    date_folder_int2 / f"調査A_{project_name}_{item_name}.xlsx"
+                    date_folder_int2 / f"調査検討書_{project_name}_{item_name}.xlsx"
                 )
                 create_empty_excel_file(
                     date_folder_int2
