@@ -1,6 +1,8 @@
 import configparser
 import logging
 from pathlib import Path
+from openpyxl import Workbook
+from openpyxl.styles import Alignment
 import datetime
 
 # ロギング設定
@@ -30,9 +32,6 @@ def load_config(config_file="config.ini"):
 def create_empty_excel_file(title, project_name, item_name, file_path: Path):
     """空のExcelファイルを模したダミーファイルを作成する"""
     try:
-        from openpyxl import Workbook
-        from openpyxl.styles import Alignment
-
         wb = Workbook()
         ws = wb.active
         # ws["A1"] = f"これはダミーのExcelファイルです。ファイル名: {file_path.name}"
