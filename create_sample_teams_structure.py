@@ -35,6 +35,7 @@ def create_empty_excel_file(file_path: Path):
         wb = Workbook()
         ws = wb.active
         ws["A1"] = f"これはダミーのExcelファイルです。ファイル名: {file_path.name}"
+        # ws.cell(row=1, column=1, value=f"これはダミーのExcelファイルです。ファイル名: {file_path.name}")
         # 表紙タイトルチェックのために、特定のセルに値を設定することも可能
         # 例: ws['B5'] = "機能設計書"
         wb.save(file_path)
