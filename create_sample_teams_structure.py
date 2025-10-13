@@ -109,31 +109,51 @@ def create_sample_teams_structure(config):
             main_excel_file_path = (
                 process_dir / f"機能設計書_{project_name}_{item_name}.xlsx"
             )
-            # create_empty_excel_file(main_excel_file_path)
+            title = config["title"]["sys_design"]
+            create_empty_excel_file(
+                title, project_name, item_name, main_excel_file_path
+            )
         elif p_num == "050":  # 製造 (Pythonファイル)
             (process_dir / f"xxx.py").touch()
         elif p_num == "060":  # UD作成
             main_excel_file_path = (
                 process_dir / f"単体試験仕様書_{project_name}_{item_name}.xlsx"
             )
-            # create_empty_excel_file(main_excel_file_path)
+            title = config["title"]["unit_test_doc"]
+            create_empty_excel_file(
+                title, project_name, item_name, main_excel_file_path
+            )
         elif p_num == "070":  # UD消化
             main_excel_file_path = (
                 process_dir / f"単体試験成績書_{project_name}_{item_name}.xlsx"
             )
-            # create_empty_excel_file(main_excel_file_path)
+            title = config["title"]["unit_test_rst"]
+            create_empty_excel_file(
+                title, project_name, item_name, main_excel_file_path
+            )
         elif p_num == "080":  # SD作成
             main_excel_file_path = (
                 process_dir / f"結合試験仕様書_{project_name}_{item_name}.xlsx"
             )
-            # create_empty_excel_file(main_excel_file_path)
-        # elif p_num == "090":  # SD消化
-        #     create_empty_excel_file(
-        #         process_dir / f"結合試験成績書_{project_name}_{item_name}.xlsx"
-        #     )
-        #     create_empty_excel_file(
-        #         process_dir / f"試験結果報告書_{project_name}_{item_name}.xlsx"
-        #     )
+            title = config["title"]["sys_test_doc"]
+            create_empty_excel_file(
+                title, project_name, item_name, main_excel_file_path
+            )
+        elif p_num == "090":  # SD消化
+            rst_excel_file_path = (
+                process_dir / f"結合試験成績書_{project_name}_{item_name}.xlsx"
+            )
+            rst_title = config["title"]["sys_test_rst"]
+            create_empty_excel_file(
+                rst_title, project_name, item_name, rst_excel_file_path
+            )
+            rep_excel_file_path = (
+                process_dir / f"試験結果報告書_{project_name}_{item_name}.xlsx"
+            )
+            rep_title = config["title"]["test_rst_report"]
+            create_empty_excel_file(
+                rep_title, project_name, item_name, rep_excel_file_path
+            )
 
         # 成果物/レビューフォルダ構造
         # 050.製造はレビューのみ
