@@ -71,12 +71,8 @@ def create_empty_excel_file(type, title, project_name, item_name, file_path: Pat
 
         wb.save(file_path)
         logging.debug(f"Created real Excel file: {file_path}")
-    except ImportError:
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(
-                f"Dummy Excel Content (Requires openpyxl for real .xlsx) - {file_path.name}"
-            )
-        logging.debug(f"Created dummy text file as .xlsx: {file_path}")
+
+    # Excelファイルの作成に失敗した場合はテキストファイルを作成
     except Exception as e:
         logging.warning(f"Failed to create dummy Excel file {file_path}: {e}")
         with open(file_path, "w", encoding="utf-8") as f:
