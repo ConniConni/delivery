@@ -307,22 +307,25 @@ def create_sample_teams_structure(config):
                 type_check, title, project_name, item_name, minutes_excel_file_path
             )
 
-        #     # 030に2回目の外部レビューを追加
-        #     if p_num == "030":
-        #         date_folder_ext2 = external_review_dir / date4.strftime("%Y%m%d")
-        #         date_folder_ext2.mkdir(exist_ok=True)
-        #         # 故意にファイル名を少し変えて、フェーズ1の収集ロジックのテストに使用
-        #         create_dummy_excel_file(
-        #             date_folder_ext2 / f"調査B_{project_name}_{item_name}.xlsx"
-        #         )
-        #         create_dummy_excel_file(
-        #             date_folder_ext2
-        #             / f"レビューチェックリスト_{p_num}_社外_2回目_{project_name}_{item_name}.xlsx"
-        #         )
-        #         create_dummy_excel_file(
-        #             date_folder_ext2
-        #             / f"レビュー記録表_{p_name}_社外_2回目_{project_name}_{item_name}.xlsx"
-        #         )
+            # 030に2回目の外部レビューを追加
+            if p_num == "030":
+                date_folder_ext2 = external_review_dir / date4.strftime("%Y%m%d")
+                date_folder_ext2.mkdir(exist_ok=True)
+
+                check_excel_file_path = (
+                    date_folder_ext2
+                    / f"レビューチェックリスト_{p_num}_社外_2回目_{project_name}_{item_name}.xlsx"
+                )
+                create_dummy_excel_file(
+                    type_review, title, project_name, item_name, check_excel_file_path
+                )
+                minutes_excel_file_path = (
+                    date_folder_ext2
+                    / f"レビュー記録表_{p_name}_社外_2回目_{project_name}_{item_name}.xlsx"
+                )
+                create_dummy_excel_file(
+                    type_check, title, project_name, item_name, minutes_excel_file_path
+                )
 
     logging.info("サンプルTeamsフォルダ構造の生成が完了しました。")
 
