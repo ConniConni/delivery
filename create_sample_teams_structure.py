@@ -334,8 +334,6 @@ if __name__ == "__main__":
     config = load_config()
     # openpyxlがインストールされているかチェック
     try:
-        import openpyxl
-
         logging.info(
             "openpyxlがインストールされています。実際に近いExcelファイルを生成します。"
         )
