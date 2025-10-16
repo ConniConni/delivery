@@ -187,59 +187,59 @@ def create_sample_teams_structure(config):
         type_review = 2
         type_check = 3
 
-        if p_num != "050" or p_num == "050":  # 全ての工程で成果物フォルダを作成
-            results_dir = process_dir / "成果物"
-            results_dir.mkdir(exist_ok=True)
+        # 全ての工程で成果物フォルダを作成
+        results_dir = process_dir / "成果物"
+        results_dir.mkdir(exist_ok=True)
 
-            # 内部レビュー
-            internal_review_dir = results_dir / "内部レビュー"
-            internal_review_dir.mkdir(exist_ok=True)
+        # 内部レビュー
+        internal_review_dir = results_dir / "内部レビュー"
+        internal_review_dir.mkdir(exist_ok=True)
 
-            date_folder_int1 = internal_review_dir / date1.strftime("%Y%m%d")
-            date_folder_int1.mkdir(exist_ok=True)
-            if (
-                main_excel_file_path and p_num != "090"
-            ):  # 090はレビューフォルダにも複数のファイルがくる
-                main_excel_file_path = date_folder_int1 / main_excel_file_path.name
-                create_dummy_excel_file(
-                    type_main, title, project_name, item_name, main_excel_file_path
-                )
-            elif p_num == "090":
-                rst_excel_file_path = (
-                    date_folder_int1 / f"結合試験成績書_{project_name}_{item_name}.xlsx"
-                )
-                create_dummy_excel_file(
-                    type_main,
-                    rst_title,
-                    project_name,
-                    item_name,
-                    rst_excel_file_path,
-                )
-                rep_excel_file_path = (
-                    date_folder_int1 / f"試験結果報告書_{project_name}_{item_name}.xlsx"
-                )
-                create_dummy_excel_file(
-                    type_main,
-                    rep_title,
-                    project_name,
-                    item_name,
-                    rep_excel_file_path,
-                )
-
-            check_excel_file_path = (
-                date_folder_int1
-                / f"{p_num}_レビューチェックリスト_社内_1回目_{project_name}_{item_name}.xlsx"
+        date_folder_int1 = internal_review_dir / date1.strftime("%Y%m%d")
+        date_folder_int1.mkdir(exist_ok=True)
+        if (
+            main_excel_file_path and p_num != "090"
+        ):  # 090はレビューフォルダにも複数のファイルがくる
+            main_excel_file_path = date_folder_int1 / main_excel_file_path.name
+            create_dummy_excel_file(
+                type_main, title, project_name, item_name, main_excel_file_path
+            )
+        elif p_num == "090":
+            rst_excel_file_path = (
+                date_folder_int1 / f"結合試験成績書_{project_name}_{item_name}.xlsx"
             )
             create_dummy_excel_file(
-                type_review, title, project_name, item_name, check_excel_file_path
+                type_main,
+                rst_title,
+                project_name,
+                item_name,
+                rst_excel_file_path,
             )
-            minutes_excel_file_path = (
-                date_folder_int1
-                / f"レビュー記録表_{p_name}_社内_1回目_{project_name}_{item_name}.xlsx"
+            rep_excel_file_path = (
+                date_folder_int1 / f"試験結果報告書_{project_name}_{item_name}.xlsx"
             )
             create_dummy_excel_file(
-                type_check, title, project_name, item_name, minutes_excel_file_path
+                type_main,
+                rep_title,
+                project_name,
+                item_name,
+                rep_excel_file_path,
             )
+
+        check_excel_file_path = (
+            date_folder_int1
+            / f"{p_num}_レビューチェックリスト_社内_1回目_{project_name}_{item_name}.xlsx"
+        )
+        create_dummy_excel_file(
+            type_review, title, project_name, item_name, check_excel_file_path
+        )
+        minutes_excel_file_path = (
+            date_folder_int1
+            / f"レビュー記録表_{p_name}_社内_1回目_{project_name}_{item_name}.xlsx"
+        )
+        create_dummy_excel_file(
+            type_check, title, project_name, item_name, minutes_excel_file_path
+        )
 
         # 030に2回目のレビューを追加
         if p_num == "030":
@@ -267,8 +267,8 @@ def create_sample_teams_structure(config):
             )
 
         # 外部レビュー
-        # external_review_dir = results_dir / "外部レビュー"
-        # external_review_dir.mkdir(exist_ok=True)
+        external_review_dir = results_dir / "外部レビュー"
+        external_review_dir.mkdir(exist_ok=True)
 
         # 外部レビューがある工程のみ作成
         # if p_num in ["030", "040", "080", "090"]:
