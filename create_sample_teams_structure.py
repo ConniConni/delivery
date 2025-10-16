@@ -242,20 +242,29 @@ def create_sample_teams_structure(config):
             )
 
         # 030に2回目のレビューを追加
-        # if p_num == "030":
-        #     date_folder_int2 = internal_review_dir / date2.strftime("%Y%m%d")
-        #     date_folder_int2.mkdir(exist_ok=True)
-        #     create_dummy_excel_file(
-        #         date_folder_int2 / f"調査検討書_{project_name}_{item_name}.xlsx"
-        #     )
-        #     create_dummy_excel_file(
-        #         date_folder_int2
-        #         / f"レビューチェックリスト_{p_num}_社内_2回目_{project_name}_{item_name}.xlsx"
-        #     )
-        #     create_dummy_excel_file(
-        #         date_folder_int2
-        #         / f"レビュー記録表_{p_name}_社内_2回目_{project_name}_{item_name}.xlsx"
-        #     )
+        if p_num == "030":
+            date_folder_int2 = internal_review_dir / date2.strftime("%Y%m%d")
+            date_folder_int2.mkdir(exist_ok=True)
+            main_excel_file_path = (
+                date_folder_int2 / f"調査検討書_{project_name}_{item_name}.xlsx"
+            )
+            create_dummy_excel_file(
+                type_main, title, project_name, item_name, main_excel_file_path
+            )
+            check_excel_file_path = (
+                date_folder_int2
+                / f"レビューチェックリスト_{p_num}_社内_2回目_{project_name}_{item_name}.xlsx"
+            )
+            create_dummy_excel_file(
+                type_review, title, project_name, item_name, check_excel_file_path
+            )
+            minutes_excel_file_path = (
+                date_folder_int2
+                / f"レビュー記録表_{p_name}_社内_2回目_{project_name}_{item_name}.xlsx"
+            )
+            create_dummy_excel_file(
+                type_check, title, project_name, item_name, minutes_excel_file_path
+            )
 
         # 外部レビュー
         # external_review_dir = results_dir / "外部レビュー"
