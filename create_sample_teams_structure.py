@@ -271,13 +271,14 @@ def create_sample_teams_structure(config):
         external_review_dir.mkdir(exist_ok=True)
 
         # 外部レビューがある工程のみ作成
-        # if p_num in ["030", "040", "080", "090"]:
-        #     date_folder_ext1 = external_review_dir / date3.strftime("%Y%m%d")
-        #     date_folder_ext1.mkdir(exist_ok=True)
-        #     if main_excel_file_path and p_num != "090":
-        #         create_dummy_excel_file(
-        #             date_folder_ext1 / main_excel_file_path.name
-        #         )
+        if p_num in ["030", "040", "080", "090"]:
+            date_folder_ext1 = external_review_dir / date3.strftime("%Y%m%d")
+            date_folder_ext1.mkdir(exist_ok=True)
+            if main_excel_file_path and p_num != "090":
+                main_excel_file_path = date_folder_ext1 / main_excel_file_path.name
+                create_dummy_excel_file(
+                    type_main, title, project_name, item_name, main_excel_file_path
+                )
         #     elif p_num == "090":
         #         create_dummy_excel_file(
         #             date_folder_ext1
