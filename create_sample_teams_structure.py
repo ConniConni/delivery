@@ -10,6 +10,26 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
+# ファイルタイプの定数を定義
+FILE_TYPE_MAIN = 1
+FILE_TYPE_REVIEW_CHECKLIST = 2
+FILE_TYPE_REVIEW_MINUTES = 3
+FILE_TYPE_PYTHON = 4  # Pythonファイル用
+
+# 各工程での主要成果物ファイル情報
+PROCESS_FILES = {
+    "030": {"main": "調査検討書", "title_key": "research"},
+    "040": {"main": "機能設計書", "title_key": "sys_design"},
+    "050": {"main": "xxx", "type": FILE_TYPE_PYTHON},  # Pythonファイルは特殊
+    "060": {"main": "単体試験仕様書", "title_key": "unit_test_doc"},
+    "070": {"main": "単体試験成績書", "title_key": "unit_test_rst"},
+    "080": {"main": "結合試験仕様書", "title_key": "sys_test_doc"},
+    "090": [
+        {"main": "結合試験成績書", "title_key": "sys_test_rst"},
+        {"main": "試験結果報告書", "title_key": "test_rst_report"},
+    ],
+}
+
 # 工程番号と工程名のマッピング
 PROCESS_MAP = {
     "030": "調査",
@@ -34,6 +54,46 @@ def load_config(config_file="config.ini"):
     config = configparser.ConfigParser()
     config.read(config_file)
     return config
+
+
+# ヘルパー関数: ファイル作成
+def create_file_with_title(
+    file_type: int,
+    base_dir: Path,
+    file_prefix: str,
+    config: configparser.ConfigParser,
+    project_name: str,
+    item_name: str,
+    specific_title_key: str = None,  # config[title] から取得するキー
+    file_extension: str = ".xlsx",
+) -> Path | None:
+    """
+    指定された情報に基づいてファイルを作成するヘルパー関数。
+    Pythonファイルの場合は .py 拡張子で空ファイルを作成し、それ以外はExcelダミーファイルを作成。
+    """
+    if file_type == FILE_TYPE_PYTHON:
+        file_path = base_dir / f"{file_prefix}.py"
+        file_path.touch()
+        logging.debug(f"Created Python file: {file_path.name}")
+        return file_path
+    else:
+        # titleはconfigから取得するか、直接prefixをタイトルとして使用
+        # 三項演算子
+        title_key = (
+            specific_title_key
+            if specific_title_key
+            else file_prefix.replace("_", "").lower()
+        )
+        title_from_config = config["title"].get(
+            title_key, file_prefix
+        )  # configにない場合のフォールバック
+
+        file_name = f"{file_prefix}_{project_name}_{item_name}{file_extension}"
+        file_path = base_dir / file_name
+        create_dummy_excel_file(
+            file_type, title_from_config, project_name, item_name, file_path
+        )
+        return file_path
 
 
 def create_dummy_excel_file(type, title, project_name, item_name, file_path: Path):
